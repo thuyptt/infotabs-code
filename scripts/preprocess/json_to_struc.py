@@ -15,7 +15,7 @@ import random
 from transformers import RobertaTokenizer, RobertaForSequenceClassification, RobertaModel, BertModel
 
 def is_date(string):
-	match = re.search('\d{4}-\d{2}-\d{2}', string)
+	match = re.search(r'\d{4}-\d{2}-\d{2}', string)
 	if match:
 		date = datetime.datetime.strptime(match.group(), '%Y-%m-%d').date()
 		return True
@@ -23,7 +23,7 @@ def is_date(string):
 		return False
 
 def write_csv(data,split):
-    with open(args['save_dir']+split+'.tsv', 'at') as outfile:
+    with open(args['save_dir']+split+'.tsv', 'at', encoding='utf-8') as outfile:
         writer = csv.writer(outfile,delimiter='\t')
         writer.writerow(data)
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 	for split in args["splits"]:
 		data = pd.read_csv(args['data_dir']+"infotabs_"+split+".tsv",sep="\t")
 
-		with open(args['save_dir']+split+".tsv", 'wt') as out:
+		with open(args['save_dir']+split+".tsv", 'wt', encoding='utf-8') as out:
 			writer = csv.writer(out, delimiter='\t')
 			writer.writerow(["index","table_id","annotator_id","premise","hypothesis","label"])
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
 		for index,row in data.iterrows():
 			file = args['json_dir'] +str(row['table_id'])+".json"
-			json_file = open(file,"r")
+			json_file = open(file,"r", encoding='utf-8')
 			data = json.load(json_file, object_pairs_hook=OrderedDict)
 
 			try:

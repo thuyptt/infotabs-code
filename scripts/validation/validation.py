@@ -129,7 +129,7 @@ if __name__=="__main__":
 	output_dir = args["save_dir"]
 	filename = args["filename"]
 
-	fo = open(output_dir+filename+".txt", "w")
+	fo = open(output_dir+filename+".txt", "w", encoding='utf-8')
 	for split in splits:
 		data = pd.read_csv(input_dir+"infotabs_valid_"+split+".tsv",sep="\t")
 		(result,cnf_matrix) = prep_data(data)

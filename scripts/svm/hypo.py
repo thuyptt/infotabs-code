@@ -3,7 +3,7 @@ import numpy as np
 from numpy import linalg as LA
 
 data_dir="./../../temp/data/parapremise/"
-save_dir="./../../temp/svmformat/hypo"
+save_dir="./../../temp/svmformat/hypo/"
 
 
 def get_dimensions(train_data,dev_data,test_data, test_adverse_data, alpha3_data):
@@ -160,21 +160,21 @@ if __name__ == "__main__":
 	print("Got_dimensions")
 	#np.save("lookup.npy",np.array(index_to_bigram))
 	train_data_final = get_data_svm_format(train_data,bigram_to_index)
-	fp = open(save_dir+"train.txt","w+")
+	fp = open(save_dir+"train.txt","w+", encoding='utf-8')
 	fp.write(train_data_final)
 
 	dev_data_final = get_data_svm_format(dev_data,bigram_to_index)
-	fp = open(save_dir+"dev.txt","w+")
+	fp = open(save_dir+"dev.txt","w+", encoding='utf-8')
 	fp.write(dev_data_final)
 
 	test_data_final = get_data_svm_format(test_data,bigram_to_index)
-	fp = open(save_dir+"test_alpha1.txt","w+")
+	fp = open(save_dir+"test_alpha1.txt","w+", encoding='utf-8')
 	fp.write(test_data_final)
 
 	test_data_adverse_final = get_data_svm_format(test_adverse_data,bigram_to_index)
-	fp = open(save_dir+"test_alpha2.txt","w+")
+	fp = open(save_dir+"test_alpha2.txt","w+", encoding='utf-8')
 	fp.write(test_data_adverse_final)
 
 	alpha3_data_final = get_data_svm_format(alpha3_data,bigram_to_index)
-	fp = open(save_dir+"test_alpha3.txt","w+")
+	fp = open(save_dir+"test_alpha3.txt","w+", encoding='utf-8')
 	fp.write(alpha3_data_final)

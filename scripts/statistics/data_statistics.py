@@ -11,7 +11,7 @@ table_dir = "./../../data/tables/"
 
 def get_TableIDs(filename):
 	ids = []
-	data = pd.read_csv(data_dir+"infotabs_"+filename+".tsv",sep="\t",encoding="ISO-8859-1")
+	data = pd.read_csv(data_dir+"infotabs_"+filename+".tsv",sep="\t",encoding="utf-8")
 
 	for index, row in data.iterrows():
 		if row['table_id'] not in ids:
@@ -22,7 +22,7 @@ def get_TableIDs(filename):
 def get_unique_keys(table_ids):
 	key_set = set()
 	for index in table_ids:
-		with open(table_dir+"json/"+index+".json") as json_file:
+		with open(table_dir+"json/"+index+".json", encoding="utf-8") as json_file:
 			dat = json.load(json_file,object_pairs_hook=OrderedDict)
 		for key in dat.keys():
 			key_set.add(key.lower())
@@ -30,7 +30,7 @@ def get_unique_keys(table_ids):
 
 def get_hypolength_per_label(filename):
 	label_dict = {'E':[],'N':[],'C':[]}
-	data = pd.read_csv(data_dir+"infotabs_"+filename+".tsv",sep="\t",encoding="ISO-8859-1")
+	data = pd.read_csv(data_dir+"infotabs_"+filename+".tsv",sep="\t",encoding="utf-8")
 
 	for index, row in data.iterrows():
 		label_dict[str(row["label"])].append(len(row["hypothesis"].split()))
@@ -40,7 +40,7 @@ def get_hypolength_per_label(filename):
 def get_annotIDs(filename):
 	annotator_ids = []
 	annotator_dict = {}
-	data = pd.read_csv(data_dir+"infotabs_"+filename+".tsv",sep="\t",encoding="ISO-8859-1")
+	data = pd.read_csv(data_dir+"infotabs_"+filename+".tsv",sep="\t",encoding="utf-8")
 
 	for index, row in data.iterrows():
 
@@ -55,7 +55,7 @@ def get_annotIDs(filename):
 def get_table_len(table_ids):
 	len_table = []
 	for index in table_ids:
-		with open(table_dir+"json/"+index+".json") as json_file:
+		with open(table_dir+"json/"+index+".json", encoding="utf-8") as json_file:
 			dat = json.load(json_file,object_pairs_hook=OrderedDict)
 		len_table.append(len(dat.keys())-1)
 
@@ -159,7 +159,7 @@ def table_categories(splits):
 	for split in splits:
 		ids_table[split] = get_TableIDs(split)
 
-	data = pd.read_csv(table_dir+"table_categories.tsv",sep="\t",encoding="ISO-8859-1")
+	data = pd.read_csv(table_dir+"table_categories.tsv",sep="\t",encoding="utf-8")
 
 	ids_categories = {}
 	for index, row in data.iterrows():
@@ -194,7 +194,7 @@ def hypothesis_table_overlap(splits):
 	for split in splits:
 		for index in ids_table[split]:
 			tableid = index
-			with open(table_dir+"json/"+index+".json") as json_file:
+			with open(table_dir+"json/"+index+".json", encoding="utf-8") as json_file:
 				dat = json.load(json_file,object_pairs_hook=OrderedDict)
 			premise_tokens[tableid] = []
 			for key in dat.keys():
@@ -212,7 +212,7 @@ def hypothesis_table_overlap(splits):
 		for key in labels:
 			hypothesis_premise_overlap[key] = []
 
-		data = pd.read_csv(data_dir+"infotabs_"+split+".tsv",sep="\t",encoding="ISO-8859-1")
+		data = pd.read_csv(data_dir+"infotabs_"+split+".tsv",sep="\t",encoding="utf-8")
 
 		for index, row in data.iterrows():
 			tableid = row['table_id']

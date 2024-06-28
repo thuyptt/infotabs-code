@@ -51,11 +51,14 @@ def load_sentences(file, skip_first=True, single_sentence=False):
                     bias experiment), and the NLI label for the pair
     """
     rows = []
-    with open(file, encoding="ISO-8859-1") as f:
+    with open(file, encoding="utf-8") as f:
         for line in f:
             if skip_first:
                 skip_first = False
                 continue
+            if line.strip() == '':
+                continue
+
             blocks = line.strip().split('\t')   # Converts to list
             
             # Takes the relevant elements of the row necessary. Putting them in a dict,

@@ -8,7 +8,7 @@ reasoning_dir = "./../../data/reasoning/"
 
 for split in splits:
 	possible_reasoning = []
-	fp = open(reasoning_dir+"infotabs_"+split+".tsv","r")
+	fp = open(reasoning_dir+"infotabs_"+split+".tsv","r", encoding="utf-8")
 	lines = fp.readlines()
 
 	reasoning_counter = {}
@@ -57,9 +57,9 @@ for split in splits:
 	print ("================================\n\n")
 	print ("========== reasoning with #prediction/#gold for "+ split+" set  =========")
 	fp.close()
-	fp = open(reasoning_dir+"infotabs_"+split+".tsv","r")
+	fp = open(reasoning_dir+"infotabs_"+split+".tsv","r", encoding="utf-8")
 	lines = fp.readlines()
-	with open('./../../temp/models/reasoning/predict_'+ split+ '.json') as f:
+	with open('./../../temp/models/reasoning/predict_'+ split+ '.json', encoding="utf-8") as f:
 		results = json.load(f)
 	f.close()
 	predictions = results['pred']

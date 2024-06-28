@@ -1,3 +1,4 @@
 data/
 infotabs_env/
 scripts/preprocess/GoogleNews*
+**/__pycache__

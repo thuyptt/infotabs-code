@@ -1,5 +1,5 @@
 # usr/bin/bash
-mkdir ./../../temp/processed
+mkdir -p ./../../temp/processed
 # para as premise
 python3 preprocess_roberta.py --max_len 512 --data_dir ./../../temp/data/ --in_dir parapremise --out_dir ../processed/parapremise --single_sentence 0 --tokenizer_type roberta-base
 # struct as a premsie
